@@ -1,0 +1,65 @@
+[project]
+name = "enterprise-support-backend"
+version = "0.1.0"
+description = "FastAPI backend for the Enterprise Software Support & Resolution Intelligence System."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "python-dotenv",
+    "python-multipart",
+    "pydantic",
+    "pydantic-settings",
+    "psycopg[binary]",
+    "psycopg-pool",
+    "sqlalchemy",
+    "PyMuPDF",
+    "openai",
+    "llama-parse",
+    "llama-index-core",
+    "llama-index-llms-azure-openai",
+    "llama-index-embeddings-azure-openai",
+    "llama-index-vector-stores-postgres",
+    "langgraph>=1.2.7",
+    "langgraph-checkpoint-postgres>=3.1.0",
+    "redis>=8.0.1",
+    "PyJWT[crypto]>=2.10.1",
+    "langfuse>=4.13.0",
+    "mcp>=1.28.1",
+    "httpx",
+    "pytest>=8.3.3",
+    "pytest-asyncio>=0.24.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.coverage.run]
+omit = [
+    "app/api/routes/*",
+    "app/core/langfuse.py",
+    "app/core/semantic_cache.py",
+    "app/ingestion/document_chunker.py",
+    "app/ingestion/embedding_generator.py",
+    "app/ingestion/image_captioner.py",
+    "app/ingestion/image_extractor.py",
+    "app/ingestion/table_extractor.py",
+    "app/ingestion/table_summarizer.py",
+    "app/middleware/request_logging.py",
+    "app/repositories/*",
+    "app/schemas/ingestion.py",
+    "app/services/document_ingestion_service.py",
+    "app/services/retrieval_service.py",
+    "app/services/tools/jira_mcp_tool.py",
+    "app/services/tools/sql_tool.py",
+    "app/services/tools/vector_tool.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 70
